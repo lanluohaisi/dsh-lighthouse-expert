@@ -1,0 +1,5 @@
+# 正式发布用 patch 行（组合包按 npm 包名引用自己）
+# 安装方式：dsh plugin --profile <名字> add dsh-lighthouse-expert（或本地路径 / tarball）
+- insert:
+    - id: lighthouse-expert
+      name: dsh-lighthouse-expert

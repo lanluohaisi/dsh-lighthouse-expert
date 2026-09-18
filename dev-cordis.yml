@@ -1,0 +1,10 @@
+# 本地快速验证（host 侧；client 侧需要完整安装才能出现，见 README）：
+#   pnpm install && pnpm build
+#   npx @deepseek-ai/dsh web --patch ./dev-cordis.yml
+#
+# 注意：name 必须指向编译产物 lib/index.js（Node 原生加载 TS 不会把 './api/bridge.js'
+# 这类 NodeNext 后缀映射回 .ts，src 源码直接加载会 ERR_MODULE_NOT_FOUND）。
+# 改动 src 后先 pnpm build 再启动。
+- insert:
+    - id: lighthouse-expert
+      name: '/Users/zhangyuanfang/exercise/dsh-lighthouse-expert/lib/index.js'
