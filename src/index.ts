@@ -26,11 +26,11 @@ export interface Config {
 
 export const Config: Schema<Config> = Schema.object({
   backend: Schema.union(['mock', 'bridge'] as const)
-    .default('mock')
-    .description('后端实现：mock=内置假数据（开发联调）；bridge=走 AgentChat 后端桥（待后端就绪）'),
+    .default('bridge')
+    .description('后端实现：bridge=真实链路（默认，走腾讯云轻量应用服务器 OAuth 授权）；mock=内置演示数据（开发调试用）'),
   apiBase: Schema.string()
     .default('https://lightai.cloud.tencent.com')
-    .description('bridge 模式的后端地址'),
+    .description('bridge 模式的后端地址（Lighthouse Agent 云端服务）'),
   timeoutMs: Schema.number().default(20000).description('请求超时（毫秒）'),
 })
 

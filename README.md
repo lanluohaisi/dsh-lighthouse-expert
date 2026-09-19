@@ -2,9 +2,26 @@
 
 腾讯云轻量应用服务器连接器 —— DeepSeek Harness (DSH) 插件。
 
-- 需求：《轻量云专家-方案B执行计划.md》（工作区根目录）
-- 参考：skillhub 源码（`../dsh-skillhub-demo/skillhub-main`）
-- 状态：**阶段 1/2 骨架完成**，backend 默认 mock（假数据），bridge 等后端对齐
+授权后，可在 DeepSeek Harness WebUI 中直接管理你的腾讯云轻量应用服务器：
+左侧入口一键查看实例列表/状态，对话中直接查询与操作（重启等高危操作走审批确认）。
+
+## 安装
+
+```bash
+# 在 DeepSeek Harness 环境中（Node >= 22）：
+dsh plugin --profile web add github:yfangzhang/dsh-lighthouse-expert
+dsh web   # 重启 WebUI 后，左侧「插件广场」上方出现「轻量云专家」
+```
+
+首次使用：点击左侧「轻量云专家」→「授权连接」→ 腾讯云扫码授权 → 即可查看/操作你的实例。
+令牌仅存于你的本机（`$DSH_HOME/lighthouse-expert/`，0600 权限），服务端零存储。
+
+> 注意：授权能力依赖 Lighthouse Agent 云端服务（lightai.cloud.tencent.com）。
+
+## 开发
+
+- 需求与设计：见配套文档（内部）
+- 参考：skillhub 源码（`@cocofhu/skillhub`）
 
 ## 目录结构
 
