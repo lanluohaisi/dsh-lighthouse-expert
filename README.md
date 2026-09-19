@@ -13,7 +13,7 @@
 ```bash
 # 在 DeepSeek Harness 环境中（Node >= 22）：
 dsh plugin --profile web add github:lanluohaisi/dsh-lighthouse-expert
-dsh web   # 启动 WebUI，左侧「插件广场」上方出现「轻量云专家」
+dsh web   # 启动 WebUI，侧栏底部操作区出现「轻量云专家」入口
 ```
 
 **首次使用**：点击左侧「轻量云专家」→「授权连接」→ 腾讯云扫码授权 → 即可查看/操作你的实例。

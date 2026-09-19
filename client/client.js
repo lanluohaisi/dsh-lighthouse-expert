@@ -258,7 +258,7 @@ window.__ModuleLoader__.load({
       );
     }
 
-    // ---- 左侧入口（挂在 sidebar.footer.action，order 7 = 插件广场之上）----
+    // ---- 左侧入口（sidebar.footer.action 插槽，order 越小越靠上）----
     function ExpertEntry() {
       const [open, setOpen] = useState(false);
       return h(
