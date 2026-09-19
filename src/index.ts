@@ -1,10 +1,9 @@
 /**
- * 轻量云专家 —— host 侧入口（对应执行计划 1.4）。
+ * 轻量云专家 —— host 侧入口。
  *
- * 结构照 skillhub（src/host.ts）：
- *   Config Schema + ctx.tools.register x3 + webServer 路由 + settings 命名空间
+ * 结构：Config Schema + ctx.tools.register x3 + webServer 路由 + settings 命名空间
  *
- * FR4 守卫：所有工具 execute 前检查授权状态，未授权返回引导文案，绝不越权调用。
+ * 安全设计：所有工具 execute 前检查授权状态，未授权返回引导文案，绝不发起云 API 调用。
  */
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import type { Context } from '@deepseek-ai/cordis'
@@ -37,7 +36,7 @@ export const Config: Schema<Config> = Schema.object({
 export function apply(ctx: Context, config: Config): void {
   const api: LighthouseApi = config.backend === 'bridge' ? createBridgeBackend(config) : createMockBackend()
 
-  /** FR4：未授权统一返回引导文案，不执行任何云 API 调用 */
+  /** 未授权统一返回引导文案，不执行任何云 API 调用 */
   const unauthorized = (status: AuthStatus) => ({
     isError: true,
     authStatus: status,

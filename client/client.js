@@ -1,13 +1,13 @@
 /**
- * 轻量云专家 —— client 侧（对应执行计划 2.1 - 2.5）。
+ * 轻量云专家 —— client 侧（浏览器）。
  *
- * 由 DSH WebUI 的 ModuleLoader 在浏览器执行（格式照 skillhub 的 client.js）：
+ * 由 DSH WebUI 的 ModuleLoader 在浏览器执行：
  *   window.__ModuleLoader__.load({ id, factory: (require) => ({ inject, apply }) })
  *
  * 注册内容：
- *   1. sidebar.footer.action（id: lighthouse-expert, order: 7 —— 插件广场 order 8 之上）
+ *   1. sidebar.footer.action 左侧导航入口（order 7，紧邻插件广场上方）
  *   2. 点击弹出的操作面板（授权引导 / 实例列表），数据来自 host 的 /lighthouse 路由
- *   3. tool.call.toolview —— 三个工具的对话卡片渲染（骨架版）
+ *   3. tool.call.toolview —— 三个工具的对话卡片渲染
  */
 window.__ModuleLoader__.load({
   id: "dsh-lighthouse-expert",
@@ -59,7 +59,7 @@ window.__ModuleLoader__.load({
       document.head.appendChild(el);
     }
 
-    // ---- i18n（骨架版默认中文；正式版跟随 locale 服务切换，见 skillhub 写法）----
+    // ---- i18n（当前默认中文；可接入 locale 服务实现多语言切换）----
     const ZH = {
       "entry.title": "轻量云专家",
       "panel.subtitle": "腾讯云轻量应用服务器连接器",
@@ -87,7 +87,7 @@ window.__ModuleLoader__.load({
       return dict[key] || key;
     }
 
-    // ---- 兼容 rc.6（list slot 用 id）与 rc.7+（keyed slot 用 key）：两个都传，照 skillhub ----
+    // ---- 兼容不同 DSH 版本的 slot 定位：list 型用 id、keyed 型用 key，两个都传 ----
     function registerSlot(slots, options, component) {
       const next = { ...options };
       if (next.id == null && next.key != null) next.id = String(next.key);
@@ -160,10 +160,10 @@ window.__ModuleLoader__.load({
       }, []);
 
       /**
-       * 轮询模式授权（对应 ai-server 的 dsh/start + dsh/status）：
+       * 轮询模式授权：
        * 1. POST auth-start 拿 { flowId, authorizeUrl }
-       * 2. authorizeUrl 存在则 window.open 腾讯云登录页（mock 下为 null 不跳转）
-       * 3. 每 2s 轮询 auth-status；authorized 时 host 已存好 token，面板直接刷新
+       * 2. authorizeUrl 存在则 window.open 腾讯云登录页（mock 模式为 null 不跳转）
+       * 3. 每 2s 轮询 auth-status；authorized 时 host 已存好令牌，面板直接刷新
        */
       async function startAuth() {
         setBusy(true);
@@ -306,7 +306,7 @@ window.__ModuleLoader__.load({
 
       ctx.effect(() => ensureCss(), "lighthouse-style");
 
-      // 左侧入口：order 7（skillhub 插件广场是 order 8，本入口在其上方）
+      // 左侧入口：order 7（排在插件广场等内置入口之前）
       slots.inject("sidebar.footer.action", () =>
         registerSlot(
           slots,

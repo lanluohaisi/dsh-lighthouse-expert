@@ -1,16 +1,15 @@
 /**
- * BridgeBackend —— 走 ai-server WorkBuddy 体系的真实实现（轮询授权模式）。
+ * BridgeBackend —— 真实云端服务实现（OAuth 轮询授权模式）。
  *
- * 对应《轻量云专家-后端改动方案.md》：
- *   授权链路：POST /workbuddy/oauth/dsh/start → 轮询 GET dsh/status → 令牌落地实例本地
- *   调用链路：POST /workbuddy/mcp（JSON-RPC tools/call，Bearer access_token）
- *   刷新链路：POST /workbuddy/oauth/token（grant_type=refresh_token，RFC 6749 form 编码）
+ * 授权链路：POST /workbuddy/oauth/dsh/start → 轮询 GET dsh/status → 令牌落地本机
+ * 调用链路：POST /workbuddy/mcp（JSON-RPC tools/call，Bearer access_token）
+ * 刷新链路：POST /workbuddy/oauth/token（grant_type=refresh_token，RFC 6749 form 编码）
  *
- * 令牌存储（零存储方案 C 的客户端侧）：
- *   $DSH_HOME/lighthouse-expert/tokens.json（权限 0600），
- *   access_token 2h / refresh_token 60d（腾讯云凭证透传，见方案文档）。
+ * 令牌存储：$DSH_HOME/lighthouse-expert/tokens.json（权限 0600）。
+ * access_token 约 2h 有效；refresh_token 约 60 天（过期后需重新授权）。
+ * 云端不存储任何长期令牌，令牌仅保存在用户本机。
  *
- * 工具名映射：远端 mcp-server-lighthouse-tc 的工具以 PascalCase 参数风格提供
+ * 工具名映射：远端 MCP 服务以 PascalCase 参数风格提供
  * （describe_instances / reboot_instances，参数 InstanceIds）——以 tools/list 实测为准。
  */
 import { promises as fs } from 'node:fs'
@@ -139,7 +138,7 @@ export function createBridgeBackend(config: BridgeConfig): LighthouseApi {
     if (status !== 200 || !body?.access_token) return false
     await writeTokens({
       access_token: body.access_token,
-      // 6.3 刷新不返回新 refresh_token，旧的继续用（方案 C）
+      // 刷新接口不返回新 refresh_token，旧的继续使用
       refresh_token: tokens.refresh_token,
       expires_at: Date.now() + Number(body.expires_in || 7200) * 1000,
       scope: body.scope || tokens.scope,

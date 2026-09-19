@@ -1,9 +1,9 @@
 /**
- * /lighthouse 本地 HTTP 路由 —— client 面板的数据源（对应执行计划 1.5 / P2）。
+ * /lighthouse 本地 HTTP 路由 —— 面板的数据源。
  *
  * 由 host 侧 ctx.inject(['webServer']) 注册（见 index.ts），与 WebUI 同源，
  * client 里直接 fetch('/lighthouse?...') 即可，无跨域问题。
- * 面板不直连 ai-server（跨域），全部经 host 转发；token 只在 host 侧流转，不经过浏览器。
+ * 面板不直连云端服务（跨域限制），全部经 host 转发；令牌只在 host 侧流转，不经过浏览器。
  *
  * 路由契约：
  *   GET  /lighthouse?action=status               → { auth }
