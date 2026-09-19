@@ -18,7 +18,8 @@ dsh web   # 启动 WebUI，左侧「插件广场」上方出现「轻量云专�
 
 **首次使用**：点击左侧「轻量云专家」→「授权连接」→ 腾讯云扫码授权 → 即可查看/操作你的实例。
 
-> 授权与云 API 调用依赖 Lighthouse Agent 云端服务（lightai.cloud.tencent.com）。
+> - 授权与云 API 调用依赖 Lighthouse Agent 云端服务（lightai.cloud.tencent.com）
+> - 入口位置在侧栏底部操作区，具体排布随所在 DSH 环境自适应（可通过插件配置调整 order）
 
 ## 工具
 
@@ -38,7 +39,7 @@ dsh web   # 启动 WebUI，左侧「插件广场」上方出现「轻量云专�
 │   ├── index.ts            # host：工具注册 + 未授权守卫 + /lighthouse 路由 + settings
 │   ├── api/
 │   │   ├── types.ts        # LighthouseApi 接口定义
-│   │   ├── mock.ts         # 内置演示数据（无需联网，默认 backend='mock' 时生效）
+│   │   ├── mock.ts         # 内置演示数据（backend 配置为 mock 时生效，无需联网）
 │   │   └── bridge.ts       # 真实云端实现（OAuth 授权 + MCP 调用 + 令牌管理）
 │   └── local-api.ts        # 面板数据源 HTTP 路由
 └── client/

@@ -5,7 +5,8 @@
  *   window.__ModuleLoader__.load({ id, factory: (require) => ({ inject, apply }) })
  *
  * 注册内容：
- *   1. sidebar.footer.action 左侧导航入口（order 7，紧邻插件广场上方）
+ *   1. sidebar.footer.action 左侧导航入口（order 决定在侧栏底部操作区的排序，
+ *      数值越小越靠上；不同 DSH 环境内置入口不同，位置自适应）
  *   2. 点击弹出的操作面板（授权引导 / 实例列表），数据来自 host 的 /lighthouse 路由
  *   3. tool.call.toolview —— 三个工具的对话卡片渲染
  */
@@ -306,7 +307,7 @@ window.__ModuleLoader__.load({
 
       ctx.effect(() => ensureCss(), "lighthouse-style");
 
-      // 左侧入口：order 7（排在插件广场等内置入口之前）
+      // 左侧入口：order 7（数值越小越靠上，按需调整与其他插件的相对位置）
       slots.inject("sidebar.footer.action", () =>
         registerSlot(
           slots,

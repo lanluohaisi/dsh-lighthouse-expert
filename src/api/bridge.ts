@@ -9,8 +9,10 @@
  * access_token 约 2h 有效；refresh_token 约 60 天（过期后需重新授权）。
  * 云端不存储任何长期令牌，令牌仅保存在用户本机。
  *
- * 工具名映射：远端 MCP 服务以 PascalCase 参数风格提供
- * （describe_instances / reboot_instances，参数 InstanceIds）——以 tools/list 实测为准。
+ * 云 API 调用由云端 MCP 服务（Lighthouse Agent）代办：插件将本插件的工具
+ * 映射到云端工具名（describe_instances / reboot_instances，参数为 PascalCase 的
+ * InstanceIds）。云端可用工具清单由服务端定义；若服务端调整工具名，以
+ * tools/list 返回为准（可动态适配，见 callToolWithAuthRetry 的调用约定）。
  */
 import { promises as fs } from 'node:fs'
 import os from 'node:os'
