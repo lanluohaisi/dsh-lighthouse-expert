@@ -16,8 +16,8 @@ import type {
 const MOCK_INSTANCES: InstanceSummary[] = [
   {
     instanceId: 'lhins-mock0001',
-    instanceName: 'abeljifulu-Hermes',
-    publicIp: '203.195.206.97',
+    instanceName: 'demo-instance',
+    publicIp: '203.0.113.10',
     privateIp: '10.0.8.21',
     zone: 'ap-guangzhou',
     state: 'RUNNING',
