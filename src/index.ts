@@ -241,7 +241,7 @@ const unauthorized = (status: AuthStatus) => ({
  * items/enum/const + description/title/default/examples），maxLength 等必须丢弃；
  * object 节点的 additionalProperties 必须显式 boolean（云端通常为 false）。
  */
-function translateSchema(schema: Record<string, unknown>): Record<string, unknown> {
+export function translateSchema(schema: Record<string, unknown>): Record<string, unknown> {
   const props = (schema.properties ?? {}) as Record<string, any>
   const required = new Set(((schema.required ?? []) as unknown[]).map(String))
   const params: Record<string, any> = {}

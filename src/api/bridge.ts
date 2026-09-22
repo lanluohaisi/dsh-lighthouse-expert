@@ -371,7 +371,7 @@ function extractMcpText(result: any): string {
  * 从远端 Agent 的 Markdown 表格解析实例（远端为 LLM 优化的输出是 Markdown 而非 JSON）。
  * 按表头列名建映射后逐行提取，列顺序变化不影响；无法解析的行跳过。
  */
-function parseInstancesFromMarkdown(md: string): InstanceSummary[] {
+export function parseInstancesFromMarkdown(md: string): InstanceSummary[] {
   const lines = md.split('\n').filter((l) => l.trim().startsWith('|'))
   if (lines.length < 3) return []
   const header = lines[0].split('|').map((s) => s.trim())
