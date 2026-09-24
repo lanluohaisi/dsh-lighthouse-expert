@@ -59,6 +59,11 @@ async function writeTokens(tokens: StoredTokens): Promise<void> {
   await fs.writeFile(file, JSON.stringify(tokens, null, 2), { mode: 0o600 })
 }
 
+/** 删除本机令牌文件（取消授权）。云端零存储（方案 C），无需通知远端。 */
+async function deleteTokens(): Promise<void> {
+  await fs.rm(tokensFilePath(), { force: true })
+}
+
 // ── 内部错误类型 ──────────────────────────────────────────
 
 /** MCP 端点返回 401（token 过期/无效） */
@@ -214,6 +219,10 @@ export function createBridgeBackend(config: BridgeConfig): LighthouseApi {
         throw new Error(body?.error_description || `dsh/start failed: HTTP ${status}`)
       }
       return { flowId: String(body.flowId), authorizeUrl: String(body.authorizeUrl) }
+    },
+
+    async revokeAuth(): Promise<void> {
+      await deleteTokens()
     },
 
     async pollAuthFlow(flowId: string): Promise<AuthFlowPoll> {

@@ -1,5 +1,5 @@
 /**
- * 轻量云专家 —— host 侧入口。
+ * 体验轻量云插件 —— host 侧入口。
  *
  * 结构：Config Schema + ctx.tools.register x3 + webServer 路由 + settings 命名空间
  *
@@ -47,7 +47,7 @@ export function apply(ctx: Context, config: Config): void {
   ctx.tools.register(defineTool({
     name: 'lighthouse_list_instances',
     description:
-      "List the user's Tencent Cloud Lighthouse (轻量应用服务器) instances: name, public IP, state, zone and specs. ALWAYS call this when the user asks about their cloud servers (我的服务器 / 实例列表 / 哪些在跑 / 机器状态). By default it queries 6 mainstream regions in parallel (北京/上海/广州/成都/南京/香港); if the user names a specific region (东京/新加坡/硅谷...), pass it as the region parameter. If the result says not authorized, tell the user to open the 轻量云专家 panel in the left sidebar.",
+      "List the user's Tencent Cloud Lighthouse (轻量应用服务器) instances: name, public IP, state, zone and specs. ALWAYS call this when the user asks about their cloud servers (我的服务器 / 实例列表 / 哪些在跑 / 机器状态). By default it queries 6 mainstream regions in parallel (北京/上海/广州/成都/南京/香港); if the user names a specific region (东京/新加坡/硅谷...), pass it as the region parameter. If the result says not authorized, tell the user to open the 🚀体验轻量云插件 panel in the left sidebar.",
     parameters: {
       region: {
         type: 'string',
@@ -145,7 +145,7 @@ export function apply(ctx: Context, config: Config): void {
       order: 210,
       text: [
         'Tencent Cloud Lighthouse (轻量应用服务器) questions: use lighthouse_list_instances for lists/status, lighthouse_describe_instance for one server, lighthouse_reboot_instances ONLY after explicit user confirmation (dangerous).',
-        'If a tool returns 未授权/not authorized, tell the user to open the 轻量云专家 panel in the left sidebar and authorize, then retry. Never fabricate instance data.',
+        'If a tool returns 未授权/not authorized, tell the user to open the 🚀体验轻量云插件 panel in the left sidebar and authorize, then retry. Never fabricate instance data.',
       ].join(' '),
     })
   })
@@ -226,8 +226,8 @@ const unauthorized = (status: AuthStatus) => ({
   authStatus: status,
   message:
     status === 'expired'
-      ? '腾讯云授权已过期。请点击左侧「轻量云专家」入口，按面板引导重新授权后再试。'
-      : '尚未完成腾讯云授权。请点击左侧「轻量云专家」入口，按面板引导完成授权后再试。',
+      ? '腾讯云授权已过期。请点击左侧「🚀体验轻量云插件」入口，按面板引导重新授权后再试。'
+      : '尚未完成腾讯云授权。请点击左侧「🚀体验轻量云插件」入口，按面板引导完成授权后再试。',
 })
 
 // ---- 动态注册：云端 MCP 工具全量透出（与 WorkBuddy 管控一致）----

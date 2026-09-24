@@ -11,6 +11,7 @@
  *   GET  /lighthouse?action=tools                → { auth, tools[] }       ← 云端能力清单
  *   POST /lighthouse?action=auth-start           → { flowId, authorizeUrl }   ← 发起授权
  *   GET  /lighthouse?action=auth-status&flowId=  → { status, message? }       ← 轮询（authorized 时触发动态注册）
+ *   POST /lighthouse?action=revoke               → { auth: 'unauthorized' }   ← 取消授权（删本机令牌）
  */
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import type { LighthouseApi } from './api/types.js'
@@ -51,6 +52,11 @@ export function handleLighthouseApi(
 
       if (req.method === 'POST' && action === 'auth-start') {
         return send(200, await api.startAuthFlow())
+      }
+
+      if (req.method === 'POST' && action === 'revoke') {
+        await api.revokeAuth()
+        return send(200, { auth: 'unauthorized' })
       }
 
       if (req.method === 'GET' && action === 'auth-status') {

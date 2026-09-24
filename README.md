@@ -1,4 +1,4 @@
-# dsh-lighthouse-expert（轻量云专家）
+# dsh-lighthouse-expert（🚀体验轻量云插件）
 
 腾讯云轻量应用服务器（Lighthouse）连接器 —— [DeepSeek Harness](https://deepseek-harness.github.io/deepseek-harness/)（DSH）插件。
 
@@ -13,10 +13,10 @@
 ```bash
 # 在 DeepSeek Harness 环境中（Node >= 22）：
 dsh plugin --profile web add github:lanluohaisi/dsh-lighthouse-expert
-dsh web   # 启动 WebUI，侧栏底部操作区出现「轻量云专家」入口
+dsh web   # 启动 WebUI，侧栏底部操作区出现「🚀体验轻量云插件」入口
 ```
 
-**首次使用**：点击左侧「轻量云专家」→「授权连接」→ 腾讯云扫码授权 → 即可查看/操作你的实例。
+**首次使用**：点击左侧「🚀体验轻量云插件」→「授权连接」→ 腾讯云扫码授权 → 即可查看/操作你的实例。
 
 > - 授权与云 API 调用依赖 Lighthouse Agent 云端服务（lightai.cloud.tencent.com），该服务分阶段开放中。若「授权连接」报错，说明服务尚未对你的环境开放，可在插件配置中把 `backend` 设为 `mock` 先体验完整交互流程
 > - 入口位置在侧栏底部操作区，具体排布随所在 DSH 环境自适应（可通过插件配置调整 order）

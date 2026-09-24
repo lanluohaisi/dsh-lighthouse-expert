@@ -77,6 +77,8 @@ export interface LighthouseApi {
   startAuthFlow(): Promise<AuthFlowStart>
   /** 轮询授权流；authorized 时实现方负责把令牌落地存储 */
   pollAuthFlow(flowId: string): Promise<AuthFlowPoll>
+  /** 取消授权：删除本机令牌文件，回到未授权状态（云端零存储，无需通知远端） */
+  revokeAuth(): Promise<void>
   /** 查询实例；不传地域时并行查主流 6 地域，传入则精确查单地域 */
   listInstances(region?: string): Promise<InstanceListResult>
   /** 云端 MCP 放行的工具清单（tools/list），给用户展示"云端放行了哪些能力" */

@@ -1,5 +1,5 @@
 /**
- * 轻量云专家 —— client 侧（浏览器）。
+ * 体验轻量云插件 —— client 侧（浏览器）。
  *
  * 由 DSH WebUI 的 ModuleLoader 在浏览器执行：
  *   window.__ModuleLoader__.load({ id, factory: (require) => ({ inject, apply }) })
@@ -22,18 +22,19 @@ window.__ModuleLoader__.load({
 .lex-entry{position:relative}
 .lex-trigger{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:13px;cursor:pointer;transition:background .16s;text-align:left}
 .lex-trigger:hover{background:var(--dsw-interactive-bg-hover,rgba(38,49,72,.06))}
-.lex-trigger__icon{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#0052d9,#00a870);color:#fff;display:grid;place-items:center;font-size:9px;font-weight:800;flex:none}
 .lex-trigger__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lex-overlay{position:fixed;inset:0;z-index:2147483000;background:var(--dsw-alias-bg-mask-3,rgba(15,23,42,.48));display:flex;align-items:center;justify-content:center;padding:24px 16px;box-sizing:border-box}
 .lex-drawer{position:relative;width:min(680px,100%);max-height:min(82vh,800px);margin:0 auto;background:var(--dsw-alias-bg-layer-2,#fff);color:var(--dsw-alias-label-primary,inherit);border:1px solid var(--dsw-alias-border-l2,#9aa5b5);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(15,23,42,.28)}
 .lex-close{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,#d1d5db);background:var(--dsw-alias-bg-layer-3,#fff);cursor:pointer;font-size:18px;line-height:1;color:var(--dsw-alias-label-secondary,#6b7280);z-index:2}
 .lex-head{display:flex;gap:14px;align-items:center;padding:18px 48px 16px 18px;border-bottom:1px solid var(--dsw-alias-border-l2,#e5e7eb)}
-.lex-dicon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;background:linear-gradient(135deg,#0052d9,#00a870);flex:none}
 .lex-title{font-size:16px;font-weight:650}
 .lex-sub{font-size:12px;color:var(--dsw-alias-label-secondary,#6b7280);margin-top:2px}
 .lex-body{overflow:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
 .lex-card{display:flex;gap:12px;align-items:center;background:var(--dsw-alias-bg-layer-3,#fff);border:1px solid var(--dsw-alias-border-l2,#e5e7eb);border-radius:12px;padding:12px}
-.lex-card__icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:11px;color:#fff;flex:none;background:linear-gradient(135deg,#0052d9,#00a870)}
+.lex-card__dot{width:10px;height:10px;border-radius:50%;flex:none;align-self:center;margin:0 2px}
+.lex-card__dot--ok{background:#00a870}
+.lex-card__dot--off{background:#9aa4b2}
+.lex-card__dot--busy{background:#ff9c00}
 .lex-card__main{flex:1;min-width:0}
 .lex-card__name{font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lex-card__meta{font-size:11px;color:var(--dsw-alias-label-tertiary,#6b7280);margin-top:2px}
@@ -48,7 +49,10 @@ window.__ModuleLoader__.load({
 .lex-btn--primary:disabled{opacity:.6;cursor:default}
 .lex-state{padding:32px;text-align:center;color:var(--dsw-alias-label-tertiary,#6b7280);font-size:13px}
 .lex-post{gap:10px}
+.lex-post-headline-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .lex-post-headline{font-size:14px;font-weight:600;color:var(--dsw-alias-label-primary,#111827)}
+.lex-revoke-btn{border:1px solid var(--dsw-alias-border-l2,#dcdfe6);background:var(--dsw-alias-bg-layer-3,#fff);color:var(--dsw-alias-label-secondary,#4b5563);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:color .16s,border-color .16s,background .16s}
+.lex-revoke-btn:hover{color:#e5484d;border-color:#e5484d;background:rgba(229,72,77,.06)}
 .lex-post-features{font-size:12.5px;line-height:1.9;color:var(--dsw-alias-label-secondary,#4b5563);background:var(--dsw-alias-fill-l2,#f3f4f6);border-radius:8px;padding:10px 12px}
 .lex-post-hint{font-size:12.5px;color:var(--dsw-alias-label-tertiary,#6b7280);line-height:1.7;margin:0}
 .lex-post-examples{font-size:12.5px;color:var(--dsw-alias-label-secondary,#4b5563);line-height:1.8;margin:0}
@@ -70,7 +74,7 @@ window.__ModuleLoader__.load({
 
     // ---- i18n（当前默认中文；可接入 locale 服务实现多语言切换）----
     const ZH = {
-      "entry.title": "轻量云专家",
+      "entry.title": "🚀体验轻量云插件",
       "panel.subtitle": "腾讯云轻量应用服务器连接器",
       "auth.desc": "连接腾讯云轻量应用服务器前，需要先完成授权。授权仅用于访问你自己的实例资源，不会扩大权限。",
       "auth.features": ["🖥 查询/管理实例", "🛡 配置防火墙", "📸 管理快照备份", "💾 查看云硬盘", "🌐 管理域名解析", "📊 监控与自检", "🧰 远程执行命令"],
@@ -81,10 +85,11 @@ window.__ModuleLoader__.load({
       "post.headline": "✅ 授权成功，已接入云端全部运维能力",
       "post.desc": "直接在下方对话框告诉我你想做什么，例如：",
       "post.examples": "“查下我的服务器” · “看看防火墙规则” · “给实例做个自检” · “看看流量包还剩多少”",
+      "post.revoke": "取消授权",
       "state.checking": "正在检查授权状态…",
     };
     const EN = {
-      "entry.title": "Lighthouse Expert",
+      "entry.title": "🚀Lighthouse Plugin",
       "panel.subtitle": "Tencent Cloud Lighthouse connector",
       "auth.desc": "Authorization is required before connecting to Tencent Cloud Lighthouse. It only grants access to your own instances.",
       "auth.features": ["🖥 manage instances", "🛡 configure firewalls", "📸 snapshots & backups", "💾 cloud disks", "🌐 domains & DNS", "📊 monitoring & self-test", "🧰 remote commands"],
@@ -95,6 +100,7 @@ window.__ModuleLoader__.load({
       "post.headline": "✅ Authorized — all cloud capabilities connected",
       "post.desc": "Just tell me what you want in the chat, e.g.:",
       "post.examples": "\"list my servers\" · \"show firewall rules\" · \"run a self-test\"",
+      "post.revoke": "Revoke access",
       "state.checking": "Checking authorization…",
     };
     let dict = ZH;
@@ -125,7 +131,7 @@ window.__ModuleLoader__.load({
       return h(
         "div",
         { className: "lex-card" },
-        h("div", { className: "lex-card__icon" }, "LH"),
+        h("span", { className: `lex-card__dot lex-card__dot--${meta.cls}`, "aria-hidden": true }),
         h(
           "div",
           { className: "lex-card__main" },
@@ -179,6 +185,20 @@ window.__ModuleLoader__.load({
        * 2. authorizeUrl 存在则 window.open 腾讯云登录页（mock 模式为 null 不跳转）
        * 3. 每 2s 轮询 auth-status；authorized 时 host 已存好令牌，面板直接刷新
        */
+      async function revokeAuth() {
+        setBusy(true);
+        setError("");
+        try {
+          await fetch("/lighthouse?action=revoke", { method: "POST" });
+          stopPoll();
+          setAuth("unauthorized");
+        } catch (err) {
+          setError(String(err));
+        } finally {
+          setBusy(false);
+        }
+      }
+
       async function startAuth() {
         setBusy(true);
         setError("");
@@ -189,6 +209,7 @@ window.__ModuleLoader__.load({
           if (data.authorizeUrl) {
             window.open(data.authorizeUrl, "_blank", "noopener,noreferrer");
           }
+
           const startedAt = Date.now();
           stopPoll();
           pollRef.current = setInterval(async () => {
@@ -238,7 +259,6 @@ window.__ModuleLoader__.load({
           h(
             "div",
             { className: "lex-head" },
-            h("div", { className: "lex-dicon" }, "LH"),
             h(
               "div",
               null,
@@ -250,7 +270,16 @@ window.__ModuleLoader__.load({
             ? h(
                 "div",
                 { className: "lex-body lex-post" },
-                h("div", { className: "lex-post-headline" }, lookup("post.headline")),
+                h(
+                  "div",
+                  { className: "lex-post-headline-row" },
+                  h("div", { className: "lex-post-headline" }, lookup("post.headline")),
+                  h(
+                    "button",
+                    { className: "lex-revoke-btn", onClick: () => void revokeAuth() },
+                    lookup("post.revoke"),
+                  ),
+                ),
                 h(
                   "div",
                   { className: "lex-feature-grid" },
@@ -290,7 +319,6 @@ window.__ModuleLoader__.load({
         h(
           "button",
           { className: "lex-trigger", type: "button", onClick: () => setOpen(true) },
-          h("span", { className: "lex-trigger__icon", "aria-hidden": true }, "LH"),
           h("span", { className: "lex-trigger__label" }, lookup("entry.title")),
         ),
         open ? h(ExpertPanel, { onClose: () => setOpen(false) }) : null,

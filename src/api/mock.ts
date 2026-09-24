@@ -122,6 +122,10 @@ export function createMockBackend(): LighthouseApi {
       return { flowId, authorizeUrl: null } // mock：无真实跳转页
     },
 
+    async revokeAuth(): Promise<void> {
+      auth = 'unauthorized'
+    },
+
     async pollAuthFlow(flowId: string): Promise<AuthFlowPoll> {
       const created = flowCreatedAt.get(flowId)
       if (created == null) return { status: 'error', message: 'unknown flowId' }
