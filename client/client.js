@@ -20,7 +20,7 @@ window.__ModuleLoader__.load({
     // ---- 样式（lex- 前缀，主题色对齐 dsw CSS 变量）----
     const CSS = `
 .lex-entry{position:relative}
-.lex-trigger{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:13px;cursor:pointer;transition:background .16s;text-align:left}
+.lex-trigger{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:14px;cursor:pointer;transition:background .16s;text-align:left}
 .lex-trigger:hover{background:var(--dsw-interactive-bg-hover,rgba(38,49,72,.06))}
 .lex-trigger__icon{flex:none;line-height:1}
 .lex-trigger__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
