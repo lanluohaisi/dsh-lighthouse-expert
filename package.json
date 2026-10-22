@@ -1,6 +1,6 @@
 {
   "name": "dsh-lighthouse-expert",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "🚀体验轻量云插件 — Tencent Cloud Lighthouse connector plugin for DeepSeek Harness",
   "repository": {
     "type": "git",
