@@ -20,9 +20,9 @@ window.__ModuleLoader__.load({
     // ---- 样式（lex- 前缀，主题色对齐 dsw CSS 变量）----
     const CSS = `
 .lex-entry{position:relative}
-.lex-trigger{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:14px;cursor:pointer;transition:background .16s;text-align:left}
+.lex-trigger{display:flex;align-items:center;gap:4px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:14px;cursor:pointer;transition:background .16s;text-align:left}
 .lex-trigger:hover{background:var(--dsw-interactive-bg-hover,rgba(38,49,72,.06))}
-.lex-trigger__icon{flex:none;line-height:1}
+.lex-trigger__icon{flex:none;width:16px;line-height:1;text-align:center;margin-top:-2px}
 .lex-trigger__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lex-overlay{position:fixed;inset:0;z-index:2147483000;background:var(--dsw-alias-bg-mask-3,rgba(15,23,42,.48));display:flex;align-items:center;justify-content:center;padding:24px 16px;box-sizing:border-box}
 .lex-drawer{position:relative;width:min(680px,100%);max-height:min(82vh,800px);margin:0 auto;background:var(--dsw-alias-bg-layer-2,#fff);color:var(--dsw-alias-label-primary,inherit);border:1px solid var(--dsw-alias-border-l2,#9aa5b5);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(15,23,42,.28)}
@@ -81,7 +81,7 @@ div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
 
     // ---- i18n（当前默认中文；可接入 locale 服务实现多语言切换）----
     const ZH = {
-      "entry.title": "🚀体验轻量云插件",
+      "entry.title": "🚀 体验轻量云插件",
       "entry.icon": "🚀",
       "entry.text": "体验轻量云插件",
       "panel.subtitle": "腾讯云轻量应用服务器连接器",
@@ -98,7 +98,7 @@ div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
       "state.checking": "正在检查授权状态…",
     };
     const EN = {
-      "entry.title": "🚀Lighthouse Plugin",
+      "entry.title": "🚀 Lighthouse Plugin",
       "entry.icon": "🚀",
       "entry.text": "Lighthouse Plugin",
       "panel.subtitle": "Tencent Cloud Lighthouse connector",
