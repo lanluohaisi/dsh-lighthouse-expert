@@ -22,8 +22,7 @@ window.__ModuleLoader__.load({
 .lex-entry{position:relative}
 .lex-trigger{display:flex;align-items:center;gap:4px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary,inherit);font:inherit;font-size:14px;cursor:pointer;transition:background .16s;text-align:left}
 .lex-trigger:hover{background:var(--dsw-interactive-bg-hover,rgba(38,49,72,.06))}
-.lex-trigger__icon{flex:none;width:16px;line-height:1;text-align:center;margin-top:-2px}
-.lex-trigger__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lex-trigger__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:-2px}
 .lex-overlay{position:fixed;inset:0;z-index:2147483000;background:var(--dsw-alias-bg-mask-3,rgba(15,23,42,.48));display:flex;align-items:center;justify-content:center;padding:24px 16px;box-sizing:border-box}
 .lex-drawer{position:relative;width:min(680px,100%);max-height:min(82vh,800px);margin:0 auto;background:var(--dsw-alias-bg-layer-2,#fff);color:var(--dsw-alias-label-primary,inherit);border:1px solid var(--dsw-alias-border-l2,#9aa5b5);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(15,23,42,.28)}
 .lex-close{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,#d1d5db);background:var(--dsw-alias-bg-layer-3,#fff);cursor:pointer;font-size:18px;line-height:1;color:var(--dsw-alias-label-secondary,#6b7280);z-index:2}
@@ -82,8 +81,6 @@ div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
     // ---- i18n（当前默认中文；可接入 locale 服务实现多语言切换）----
     const ZH = {
       "entry.title": "🚀 体验轻量云插件",
-      "entry.icon": "🚀",
-      "entry.text": "体验轻量云插件",
       "panel.subtitle": "腾讯云轻量应用服务器连接器",
       "auth.desc": "连接腾讯云轻量应用服务器前，需要先完成授权。授权仅用于访问你自己的实例资源，不会扩大权限。",
       "auth.features": ["🖥 查询/管理实例", "🛡 配置防火墙", "📸 管理快照备份", "💾 查看云硬盘", "🌐 管理域名解析", "📊 监控与自检", "🧰 远程执行命令"],
@@ -99,8 +96,6 @@ div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
     };
     const EN = {
       "entry.title": "🚀 Lighthouse Plugin",
-      "entry.icon": "🚀",
-      "entry.text": "Lighthouse Plugin",
       "panel.subtitle": "Tencent Cloud Lighthouse connector",
       "auth.desc": "Authorization is required before connecting to Tencent Cloud Lighthouse. It only grants access to your own instances.",
       "auth.features": ["🖥 manage instances", "🛡 configure firewalls", "📸 snapshots & backups", "💾 cloud disks", "🌐 domains & DNS", "📊 monitoring & self-test", "🧰 remote commands"],
@@ -330,8 +325,7 @@ div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
         h(
           "button",
           { className: "lex-trigger", type: "button", onClick: () => setOpen(true) },
-          h("span", { className: "lex-trigger__icon" }, lookup("entry.icon")),
-          h("span", { className: "lex-trigger__label" }, lookup("entry.text")),
+          h("span", { className: "lex-trigger__label" }, lookup("entry.title")),
         ),
         open ? h(ExpertPanel, { onClose: () => setOpen(false) }) : null,
       );
