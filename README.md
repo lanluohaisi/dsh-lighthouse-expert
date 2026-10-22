@@ -13,7 +13,7 @@
 ```bash
 # 在 DeepSeek Harness 环境中（Node >= 22）：
 # # 后为 commit hash（插件广场按此 pin 安装，不用 tag 名）
-dsh plugin --profile web add github:lanluohaisi/dsh-lighthouse-expert#8225148
+dsh plugin --profile web add github:lanluohaisi/dsh-lighthouse-expert#5c600c5
 dsh web   # 启动 WebUI，侧栏底部操作区出现「🚀体验轻量云插件」入口
 ```
 
