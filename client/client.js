@@ -62,6 +62,12 @@ window.__ModuleLoader__.load({
 .lex-error{margin:0;padding:10px 18px 14px;color:#c0392b;font-size:12px}
 .lex-tv{display:flex;flex-direction:column;gap:10px;padding:4px 2px}
 .lex-tv__raw{font-size:11px;background:var(--dsw-alias-markdown-tag,#f3f4f6);border-radius:8px;padding:10px;overflow:auto;margin:0}
+/* ── DSH 0.2.1-rc.2 侧栏 footer 插槽适配 ──
+   新版 footerActions 容器为横向布局且高度受限（约 50px），多个插件入口会横向重叠
+   （skillhub 同样受影响）。恢复「侧栏底部操作区」的纵向列表语义；
+   用属性包含选择器，兼容宿主类名前缀（dsh-llx_x_*）的版本间变化。 */
+div[class*="footerActions"]{flex-direction:column !important;height:auto !important;max-height:none !important;overflow:visible !important}
+div[class*="footerActions"] > *{width:100% !important;box-sizing:border-box}
 `;
     let cssDone = false;
     function ensureCss() {
