@@ -2,7 +2,8 @@
  * BridgeBackend —— 真实云端服务实现（OAuth 轮询授权模式）。
  *
  * 授权链路：POST /workbuddy/oauth/dsh/start → 轮询 GET dsh/status → 令牌落地本机
- * 调用链路：POST /workbuddy/mcp（JSON-RPC tools/call，Bearer access_token）
+ * 调用链路：POST /workbuddy/mcp/dsh（JSON-RPC tools/call，Bearer access_token；
+ *           路径后缀 dsh 供服务端日志 platform 字段区分 DSH 与 WorkBuddy）
  * 刷新链路：POST /workbuddy/oauth/token（grant_type=refresh_token，RFC 6749 form 编码）
  *
  * 令牌存储：$DSH_HOME/lighthouse-expert/tokens.json（权限 0600）。
@@ -99,6 +100,9 @@ const MAINSTREAM_REGIONS = [
 
 // ── Backend 实现 ──────────────────────────────────────────
 
+/** MCP 端点路径：后缀 dsh 使服务端日志 platform='dsh'，与 WorkBuddy（默认 workbuddy）区分统计 */
+const MCP_PATH = '/workbuddy/mcp/dsh'
+
 export function createBridgeBackend(config: BridgeConfig): LighthouseApi {
   const base = config.apiBase.replace(/\/+$/, '')
   let rpcSeq = 0
@@ -123,7 +127,7 @@ export function createBridgeBackend(config: BridgeConfig): LighthouseApi {
 
   /** 调 MCP JSON-RPC tools/call（需有效 access_token） */
   async function mcpCallTool(accessToken: string, name: string, args: Record<string, unknown>): Promise<any> {
-    const { status, body } = await fetchJson(`${base}/workbuddy/mcp`, {
+    const { status, body } = await fetchJson(`${base}${MCP_PATH}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -145,7 +149,7 @@ export function createBridgeBackend(config: BridgeConfig): LighthouseApi {
 
   /** 调 MCP JSON-RPC tools/list（需有效 access_token），返回云端放行的工具数组 */
   async function mcpListTools(accessToken: string): Promise<any[]> {
-    const { status, body } = await fetchJson(`${base}/workbuddy/mcp`, {
+    const { status, body } = await fetchJson(`${base}${MCP_PATH}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
